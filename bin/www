@@ -7,7 +7,6 @@
 const app = require('../app');
 const debug = require('debug')('bind-ui:server');
 const http = require('http');
-require('dotenv').config();
 
 /**
  * Get port from environment and store in Express.
@@ -32,8 +31,10 @@ server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
+ * @param {string} val The port or named pipe
+ * @return {string|number|boolean} the port or named pipe
+ * or false if the port is invalid
  */
-
 function normalizePort(val) {
   const port = parseInt(val, 10);
 
@@ -52,16 +53,14 @@ function normalizePort(val) {
 
 /**
  * Event listener for HTTP server "error" event.
+ * @param {Error} error The error event
  */
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
 
-  const bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -81,11 +80,8 @@ function onError(error) {
 /**
  * Event listener for HTTP server "listening" event.
  */
-
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
