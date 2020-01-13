@@ -6,16 +6,25 @@ module.exports = {
   },
   'extends': [
     'google',
+    'plugin:react/recommended',
   ],
+  'ignorePatterns': ['node_modules/', 'build'],
   'globals': {
     'Atomics': 'readonly',
     'SharedArrayBuffer': 'readonly',
   },
   'parserOptions': {
     'ecmaVersion': 2018,
+    'sourceType': 'module',
   },
   'rules': {
     'object-curly-spacing': [2, 'always'],
     'linebreak-style': 0,
+  },
+  'settings': {
+    'react': {
+      'pragma': 'React',
+      'version': 'detect'
+    }
   },
 };

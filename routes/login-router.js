@@ -1,26 +1,16 @@
 const express = require('express');
 const passport = require('passport');
+const path = require('path');
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
-/* GET zone listing. */
+/* GET login listing. */
 router.get('/', (req, res) => {
-  res.send(`<form action="/login" method="post">
-<div>
-    <label>Username:</label>
-    <input type="text" name="username"/>
-</div>
-<div>
-    <label>Password:</label>
-    <input type="password" name="password"/>
-</div>
-<div>
-    <input type="submit" value="Log In"/>
-</div>
-</form>`);
+  res.sendFile(path.join(__dirname, '../html/login.html'));
 });
 
+/* POST login */
 router.post('/', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login',

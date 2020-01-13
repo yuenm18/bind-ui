@@ -5,6 +5,10 @@ const router = express.Router();
 
 /* GET record types. */
 router.get('/', function(req, res, next) {
+  if (!req.user) {
+    return res.status(401).send();
+  }
+
   res.send(recordTypes);
 });
 

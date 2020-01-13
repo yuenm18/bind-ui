@@ -16,7 +16,6 @@ firebase.initializeApp({
   projectId: process.env.FIREBASE_PROJECT_ID,
 });
 
-const indexRouter = require('./routes/index-router');
 const zoneRouter = require('./routes/zone-router');
 const recordTypesRouter = require('./routes/record-types-router');
 const loginRouter = require('./routes/login-router');
@@ -27,7 +26,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(session({
   cookie: { maxAge: 86400000 },
   secret: process.env.SECRET,
@@ -37,13 +36,16 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/api/login', loginRouter);
+app.use('/api/zone', zoneRouter);
+app.use('/api/record-types', recordTypesRouter);
 
-app.use('/', indexRouter);
-app.use('/login', loginRouter);
-app.use('/zone', zoneRouter);
-app.use('/record-types', recordTypesRouter);
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 passport.use(new LocalStrategy(async (username, password, done) => {
   try {
@@ -54,6 +56,7 @@ passport.use(new LocalStrategy(async (username, password, done) => {
     return done(null, false);
   }
 }));
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -61,4 +64,5 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
   done(null, user);
 });
+
 module.exports = app;
