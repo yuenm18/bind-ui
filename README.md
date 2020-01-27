@@ -24,5 +24,5 @@ SECRET=<session-secret>
 FIREBASE_API_KEY=<api-key>
 FIREBASE_PROJECT_ID=<project-id>
 ```
-4. Run `npm run build` to build the react project
+4. Run `npm install && npm run build`
 5. Run `npm run install`
