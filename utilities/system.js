@@ -26,6 +26,11 @@ function validateZoneFile() {
     validate.on('close', (code) => {
       !code ? resolve(output) : reject(output);
     });
+
+    validate.on('error', (err) => {
+      console.error('Unable to run "namedcheckzone." Ensure it is installed, ' +
+      'accessible in $PATH and can be run by this user', err);
+    });
   });
 }
 
@@ -50,6 +55,11 @@ function restartBind() {
 
     restart.on('close', (code) => {
       !code ? resolve(output) : reject(output);
+    });
+
+    restart.on('error', (err) => {
+      console.error('Unable to run "rndc." Ensure it is installed, ' +
+      'accessible in $PATH and can be run by this user', err);
     });
   });
 }
