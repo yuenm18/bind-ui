@@ -15,7 +15,7 @@ class SOA {
    * updated and initiate a zone transfer.
    * @param {number} refresh The number of seconds after which the \
    * secondary name servers should query the master for the SOA record
-   * @param {number} retry The number of secords after which secondary \
+   * @param {number} retry The number of seconds after which secondary \
    * name servers should retry to request the serial number from the master \
    * if the master does not respond (must be less than refresh and retry)
    * @param {number} expire The number of seconds after which the name \

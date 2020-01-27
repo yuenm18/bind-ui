@@ -12,6 +12,7 @@ function parseZoneFile(zoneFileString) {
   const zoneFileLines = zoneFileString.split('\n').map((s) => s.trim());
 
   const records = [];
+  let defaultTTL = 86400;
   let soa = new SOA();
   for (const zoneFileLine of zoneFileLines) {
     const lineItems = zoneFileLine.split(/[ ]+/);
@@ -21,12 +22,15 @@ function parseZoneFile(zoneFileString) {
 
     // no variable lines in zonefile
     if (lineItems[0].startsWith('$')) {
+      if (lineItems[0] === '$TTL') {
+        defaultTTL = +lineItems[1];
+      }
       continue;
     }
 
-    if (lineItems.length === 11) {
-      soa = new SOA(lineItems[4], lineItems[5], +lineItems[6],
-          +lineItems[7], +lineItems[8], +lineItems[9], +lineItems[10]);
+    if (lineItems.length === 10) {
+      soa = new SOA(lineItems[3], lineItems[4], +lineItems[5], +lineItems[6],
+          +lineItems[7], +lineItems[8], +lineItems[9]);
     }
 
     if (lineItems.length === 5) {
@@ -36,7 +40,7 @@ function parseZoneFile(zoneFileString) {
     }
   }
 
-  const zoneFile = new ZoneFile(process.env.ORIGIN, process.env.TTL, soa,
+  const zoneFile = new ZoneFile(process.env.ORIGIN, defaultTTL, soa,
       records);
   return zoneFile;
 }
@@ -50,7 +54,7 @@ function parseZoneFile(zoneFileString) {
  */
 function stringifyZoneFile(zoneFile, serial) {
   const origin = `$ORIGIN ${process.env.ORIGIN}`;
-  const ttl = `$TTL ${process.env.TTL}`;
+  const ttl = `$TTL ${zoneFile.defaultTTL}`;
   const soa = `@ IN SOA ${zoneFile.soa.mname} ${zoneFile.soa.rname} \
 ${zoneFile.soa.serial} ${zoneFile.soa.refresh} ${zoneFile.soa.retry} \
 ${zoneFile.soa.expire} ${zoneFile.soa.ttl}`;

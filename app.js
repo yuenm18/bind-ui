@@ -17,8 +17,7 @@ firebase.initializeApp({
 });
 
 const zoneRouter = require('./routes/zone-router');
-const recordTypesRouter = require('./routes/record-types-router');
-const loginRouter = require('./routes/login-router');
+const authRouter = require('./routes/auth-router');
 
 const app = express();
 
@@ -39,9 +38,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/api/login', loginRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/zone', zoneRouter);
-app.use('/api/record-types', recordTypesRouter);
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));

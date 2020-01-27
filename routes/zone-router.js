@@ -40,7 +40,10 @@ router.put('/', async function(req, res, next) {
   } catch (e) {
     if (originalZoneFileString) {
       await system.saveZoneFile(originalZoneFileString);
-      await system.restartBind();
+      try {
+        await system.restartBind();
+      } catch (e) {
+      };
     }
 
     res.status(500).send(e);

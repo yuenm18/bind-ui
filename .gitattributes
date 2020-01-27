@@ -1,2 +1,5 @@
 * text=auto !eol
 *.js text
+
+*.png binary
+*.ico binary
