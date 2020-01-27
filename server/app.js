@@ -42,7 +42,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/zone', zoneRouter);
 
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });
 
 passport.use(new LocalStrategy(async (username, password, done) => {

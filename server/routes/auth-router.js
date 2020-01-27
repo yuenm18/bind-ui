@@ -4,6 +4,12 @@ const passport = require('passport');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
+/**
+ * Note: The 'bind-ui' cookie isn't used for security.  It is only used so
+ * that the frontend knows if it should redirect to the login page or not
+ * on initial page load
+ */
+
 /* POST login */
 router.post('/login', passport.authenticate('local'), (req, res) => {
   res.cookie('bind-ui', '{"isAuthenticated": true}', { maxAge: 86400000 });

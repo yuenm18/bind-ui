@@ -2,7 +2,11 @@
 
 A simple web client for BIND written with React and Express.
 
-**Note:** It's best to start with a fresh file since the parser is not very sophisticated
+![Screenshot of Home Page](images/home-page.jpg)
+
+**Notes:**
+1. Currently firebase is used as a backend for storing user credentials.
+2.  It's best to start with a fresh file since the parser is not very sophisticated
 
 ## Installation
 
@@ -21,4 +25,4 @@ FIREBASE_API_KEY=<api-key>
 FIREBASE_PROJECT_ID=<project-id>
 ```
 4. Run `npm run build` to build the react project
-5. Run `npm run serve`
+5. Run `npm run install`

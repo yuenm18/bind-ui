@@ -9,8 +9,9 @@
     "old:start:proxy": "ws",
     "build": "react-scripts build",
     "lint": "eslint bin/www app.js **/*.js",
-    "serve": "pm2 start server/bin/www --name bind-ui",
-    "monitor": "pm2 monit"
+    "install": "pm2 start server/bin/www --name bind-ui",
+    "monitor": "pm2 monit",
+    "uninstall": "pm2 delete bind-ui"
   },
   "dependencies": {
     "@material-ui/core": "^4.8.3",

@@ -114,12 +114,12 @@ export default class AdminContainer extends React.Component {
     const records = this.state.zoneFile ? this.state.zoneFile.records : [];
     const soa = this.state.zoneFile ? this.state.zoneFile.soa : {};
 
-    if (this.state.isLoading) {
-      return <CircularProgress />;
-    }
-
     if (!this.props.isAuthenticated) {
       return <Redirect to="/login"></Redirect>;
+    }
+
+    if (this.state.isLoading) {
+      return <CircularProgress />;
     }
 
     return (
