@@ -1,12 +1,13 @@
 # BIND UI
 
-A simple web client for BIND written with React and Express.
+A simple web client for BIND.
 
 ![Screenshot of Home Page](images/home-page.jpg)
 
 **Notes:**
-1. Currently firebase is used as a backend for storing user credentials.
-2.  It's best to start with a fresh file since the parser is not very sophisticated
+1. Currently firebase is used for storing user credentials.
+2. It's best to start with a fresh zone file since the parser is not very sophisticated.
+
 
 ## Installation
 
