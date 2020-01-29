@@ -18,8 +18,7 @@ export async function updateZone(zoneFile) {
     }
 
     return r.text()
-        .then((t) => Promise.reject(JSON.stringify(t)))
-        .catch(() => Promise.reject(JSON.stringify(r)));
+        .then((t) => Promise.reject(JSON.stringify(t)));
   });
 }
 
@@ -35,7 +34,6 @@ export async function getZone() {
     }
 
     return r.text()
-        .then((t) => Promise.reject(JSON.stringify(t)))
-        .catch(() => Promise.reject(JSON.stringify(r)));
+        .then((t) => Promise.reject(JSON.stringify(t)));
   });
 }
