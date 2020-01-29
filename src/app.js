@@ -43,13 +43,26 @@ export default class App extends React.Component {
   }
 
   /**
-   * Displays a snackbar
+   * Displays a snackbar error
    *
    * @param {String} message The snackbar message
    */
   displaySnackbarError(message = 'An error has occurred') {
     this.setState({
       snackbarMessage: message,
+      snackbarSeverity: 'error',
+    });
+  }
+
+  /**
+   * Displays a snackbar success
+   *
+   * @param {String} message The snackbar message
+   */
+  displaySnackbarSuccess(message = 'The operation was completed successfully') {
+    this.setState({
+      snackbarMessage: message,
+      snackbarSeverity: 'success',
     });
   }
 
@@ -110,7 +123,8 @@ export default class App extends React.Component {
                 <AdminContainer
                   isAuthenticated={isAuthenticated}
                   logout={this.logout}
-                  displaySnackbarError={this.displaySnackbarError} />
+                  displaySnackbarError={this.displaySnackbarError}
+                  displaySnackbarSuccess={this.displaySnackbarSuccess} />
               </Route>
             </Switch>
           </React.Suspense>
@@ -119,7 +133,9 @@ export default class App extends React.Component {
           open={!!this.state.snackbarMessage}
           autoHideDuration={3000}
           onClose={this.handleSnackbarClose}>
-          <Alert severity="error">{this.state.snackbarMessage}</Alert>
+          <Alert severity={this.state.snackbarSeverity}>
+            {this.state.snackbarMessage}
+          </Alert>
         </Snackbar>
       </Router>
     );

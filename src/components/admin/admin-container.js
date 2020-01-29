@@ -95,6 +95,8 @@ export default class AdminContainer extends React.Component {
   updateZone(zone) {
     return updateZone(zone)
         .then((r) => {
+          this.props
+              .displaySnackbarSuccess('Options were updated successfully');
           this.setState((state) => {
             state.zoneFile = r;
           });
@@ -153,4 +155,5 @@ AdminContainer.propTypes = {
   logout: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   displaySnackbarError: PropTypes.func.isRequired,
+  displaySnackbarSuccess: PropTypes.func.isRequired,
 };
