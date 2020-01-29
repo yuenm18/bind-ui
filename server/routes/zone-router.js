@@ -35,15 +35,15 @@ router.put('/', async function(req, res, next) {
     const newZoneFile = req.body;
     newZoneFile.soa.serial = originalZoneFile.soa.serial + 1;
     const newZoneFileString = converter.stringifyZoneFile(newZoneFile);
-    updateZoneFile(newZoneFileString);
+    await updateZoneFile(newZoneFileString);
 
     res.send(newZoneFile);
   } catch (e) {
     console.error('Error updating zone file', e);
     if (originalZoneFileString) {
       console.log('Restoring zone file');
-      updateZoneFile(originalZoneFileString);
       try {
+        await updateZoneFile(originalZoneFileString);
       } catch (e) {
         console.error('Error restoring bind file', e);
       };
