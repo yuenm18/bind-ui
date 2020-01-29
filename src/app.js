@@ -32,6 +32,7 @@ export default class App extends React.Component {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.displaySnackbarError = this.displaySnackbarError.bind(this);
+    this.displaySnackbarSuccess = this.displaySnackbarSuccess.bind(this);
     this.handleSnackbarClose = this.handleSnackbarClose.bind(this);
 
     this.state = {

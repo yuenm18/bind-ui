@@ -96,7 +96,7 @@ export default class AdminContainer extends React.Component {
     return updateZone(zone)
         .then((r) => {
           this.props
-              .displaySnackbarSuccess('Options were updated successfully');
+              .displaySnackbarSuccess('Zone was updated successfully');
           this.setState((state) => {
             state.zoneFile = r;
           });
