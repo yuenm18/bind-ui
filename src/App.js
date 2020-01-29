@@ -7,9 +7,13 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import Container from '@material-ui/core/Container';
-import LoginContainer from './components/login/login-container';
-import AdminContainer from './components/admin/admin-container';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Navbar from './components/navbar/navbar';
+
+const LoginContainer = React.lazy(
+    () => import('./components/login/login-container'));
+const AdminContainer = React.lazy(
+    () => import('./components/admin/admin-container'));
 
 /**
  * App component
@@ -94,20 +98,22 @@ export default class App extends React.Component {
           logout={this.logout}
           displaySnackbarError={this.displaySnackbarError} />
         <Container maxWidth="md">
-          <Switch>
-            <Route path="/login">
-              <LoginContainer
-                isAuthenticated={isAuthenticated}
-                login={this.login}
-                displaySnackbarError={this.displaySnackbarError} />
-            </Route>
-            <Route path="*">
-              <AdminContainer
-                isAuthenticated={isAuthenticated}
-                logout={this.logout}
-                displaySnackbarError={this.displaySnackbarError} />
-            </Route>
-          </Switch>
+          <React.Suspense fallback={<CircularProgress />}>
+            <Switch>
+              <Route path="/login">
+                <LoginContainer
+                  isAuthenticated={isAuthenticated}
+                  login={this.login}
+                  displaySnackbarError={this.displaySnackbarError} />
+              </Route>
+              <Route path="*">
+                <AdminContainer
+                  isAuthenticated={isAuthenticated}
+                  logout={this.logout}
+                  displaySnackbarError={this.displaySnackbarError} />
+              </Route>
+            </Switch>
+          </React.Suspense>
         </Container>
         <Snackbar
           open={!!this.state.snackbarMessage}

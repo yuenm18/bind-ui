@@ -5,8 +5,8 @@ A simple web client for BIND.
 ![Screenshot of Home Page](images/home-page.jpg)
 
 **Notes:**
-1. Currently firebase is used for storing user credentials.
-2. It's best to start with a fresh zone file since the parser is not very sophisticated.
+1. It's best to start with a fresh zone file since the parser is not very sophisticated.
+2. A firebase account is needed for storing user credentials.
 
 
 ## Installation
@@ -26,4 +26,4 @@ FIREBASE_API_KEY=<api-key>
 FIREBASE_PROJECT_ID=<project-id>
 ```
 4. Run `npm install && npm run build`
-5. Run `npm run install`
+5. Run `npm run pm2-install` and navigate to [http://localhost:3001](http://localhost:3001)

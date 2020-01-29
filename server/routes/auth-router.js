@@ -12,7 +12,7 @@ const router = express.Router();
 
 /* POST login */
 router.post('/login', passport.authenticate('local'), (req, res) => {
-  res.cookie('bind-ui', '{"isAuthenticated": true}', { maxAge: 86400000 });
+  res.cookie('bind-ui', '{"isAuthenticated": true}');
   res.send();
 });
 

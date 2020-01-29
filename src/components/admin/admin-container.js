@@ -6,9 +6,10 @@ import {
   Redirect,
 } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Home from './home/home';
-import Options from './options/options';
 import { getZone, updateZone } from '../../services/zone-service';
+
+const Home = React.lazy(() => import('./home/home'));
+const Options = React.lazy(() => import('./options/options'));
 
 /**
  * Admin component
@@ -124,23 +125,25 @@ export default class AdminContainer extends React.Component {
 
     return (
       <div>
-        <Switch>
-          <Route exact path="/">
-            <Home
-              defaultTTL={defaultTTL}
-              records={records}
-              updateRecords={this.updateRecords} />
-          </Route>
-          <Route path="/options">
-            <Options
-              {...soa}
-              defaultTTL={defaultTTL}
-              updateOptions={this.updateOptions} />
-          </Route>
-          <Route path="*">
-            <h1>404 Not Found</h1>
-          </Route>
-        </Switch>
+        <React.Suspense fallback={<CircularProgress />}>
+          <Switch>
+            <Route exact path="/">
+              <Home
+                defaultTTL={defaultTTL}
+                records={records}
+                updateRecords={this.updateRecords} />
+            </Route>
+            <Route path="/options">
+              <Options
+                {...soa}
+                defaultTTL={defaultTTL}
+                updateOptions={this.updateOptions} />
+            </Route>
+            <Route path="*">
+              <h1>404 Not Found</h1>
+            </Route>
+          </Switch>
+        </React.Suspense>
       </div>
     );
   }
