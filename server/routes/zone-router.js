@@ -32,26 +32,18 @@ router.put('/', async function(req, res, next) {
     const originalZoneFile = converter.parseZoneFile(originalZoneFileString);
 
     console.log('Updating zone file');
-    const updateZoneFile = req.body;
-    updateZoneFile.soa.serial = originalZoneFile.soa.serial + 1;
-    const updateZoneFileString = converter.stringifyZoneFile(updateZoneFile);
-    await system.saveZoneFile(updateZoneFileString);
+    const newZoneFile = req.body;
+    newZoneFile.soa.serial = originalZoneFile.soa.serial + 1;
+    const newZoneFileString = converter.stringifyZoneFile(newZoneFile);
+    updateZoneFile(newZoneFileString);
 
-    console.log('Validating zone file');
-    await system.validateZoneFile();
-
-    console.log('Restarting BIND');
-    await system.restartBind();
-
-    res.send(updateZoneFile);
+    res.send(newZoneFile);
   } catch (e) {
     console.error('Error updating zone file', e);
     if (originalZoneFileString) {
+      console.log('Restoring zone file');
+      updateZoneFile(originalZoneFileString);
       try {
-        console.log('Restoring zone file');
-        await system.saveZoneFile(originalZoneFileString);
-        console.log('Restarting BIND');
-        await system.restartBind();
       } catch (e) {
         console.error('Error restoring bind file', e);
       };
@@ -60,5 +52,20 @@ router.put('/', async function(req, res, next) {
     res.status(500).send(e);
   }
 });
+
+/**
+ * Saves the zone file, validates it and restarts bind
+ *
+ * @param {string} zoneFileString The zone file string
+ */
+async function updateZoneFile(zoneFileString) {
+  await system.saveZoneFile(zoneFileString);
+
+  console.log('Validating zone file');
+  await system.validateZoneFile();
+
+  console.log('Restarting BIND');
+  await system.restartBind();
+}
 
 module.exports = router;

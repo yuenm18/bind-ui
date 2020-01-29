@@ -104,8 +104,13 @@ export default class Home extends React.Component {
    * @return {Promise} A promise containing the request
    */
   updateRecords(records) {
-    return this.props.updateRecords(records).then((r) => {
-      this.setState({ records: r });
+    return this.props.updateRecords(records).then((updatedRecords) => {
+      this.setState({
+        records: updatedRecords.map((r, i) => {
+          r.id = i;
+          return r;
+        }),
+      });
     });
   }
 }

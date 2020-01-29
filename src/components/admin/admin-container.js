@@ -62,7 +62,9 @@ export default class AdminContainer extends React.Component {
    * @return {Promise} A promise containing the api request
    */
   updateRecords(records) {
-    return this.updateZone({ ...this.state.zoneFile, records });
+    return this.updateZone({ ...this.state.zoneFile, records }).then(
+        (zoneFile) => zoneFile.records,
+    );
   }
 
   /**
@@ -100,9 +102,11 @@ export default class AdminContainer extends React.Component {
           this.setState((state) => {
             state.zoneFile = r;
           });
+
+          return r;
         })
         .catch((e) => {
-          this.props.displaySnackbarError();
+          this.props.displaySnackbarError(`Error updating zone: ${e}`);
           throw e;
         });
   }
