@@ -45,7 +45,7 @@ router.put('/', async function(req, res, next) {
 
     res.send(updateZoneFile);
   } catch (e) {
-    console.err('Error updating zone file', e);
+    console.error('Error updating zone file', e);
     if (originalZoneFileString) {
       try {
         console.log('Restoring zone file');
@@ -53,7 +53,7 @@ router.put('/', async function(req, res, next) {
         console.log('Restarting BIND');
         await system.restartBind();
       } catch (e) {
-        console.err('Error restoring bind file', e);
+        console.error('Error restoring bind file', e);
       };
     }
 
