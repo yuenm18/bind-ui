@@ -5,8 +5,9 @@ A simple web client for BIND.
 ![Screenshot of Home Page](images/home-page.jpg)
 
 **Notes:**
-1. It's best to start with a fresh zone file since the parser is not very sophisticated.
-2. A firebase account is needed for storing user credentials.
+1. This only supports A, AAAA, CNAME, NS, and TXT records
+2. It's best to start with a fresh zone file since the parser is not very sophisticated.
+3. A firebase account is needed for storing user credentials.
 
 
 ## Installation

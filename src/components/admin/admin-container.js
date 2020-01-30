@@ -106,7 +106,7 @@ export default class AdminContainer extends React.Component {
           return r;
         })
         .catch((e) => {
-          this.props.displaySnackbarError(`Error updating zone: ${e}`);
+          this.props.displaySnackbarError(`Error updating zone: "${e}"`);
           throw e;
         });
   }

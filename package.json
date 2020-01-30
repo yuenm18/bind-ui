@@ -9,6 +9,7 @@
     "old:start:proxy": "ws",
     "build": "react-scripts build",
     "lint": "eslint **/*.js",
+    "test": "react-scripts test",
     "pm2-install": "pm2 start server/bin/www --name bind-ui",
     "pm2-monitor": "pm2 monit",
     "pm2-uninstall": "pm2 delete bind-ui"

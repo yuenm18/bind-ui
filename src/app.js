@@ -132,7 +132,7 @@ export default class App extends React.Component {
         </Container>
         <Snackbar
           open={!!this.state.snackbarMessage}
-          autoHideDuration={3000}
+          autoHideDuration={5000}
           onClose={this.handleSnackbarClose}>
           <Alert severity={this.state.snackbarSeverity}>
             {this.state.snackbarMessage}
