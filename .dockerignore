@@ -1,0 +1,6 @@
+*
+
+!package*.json
+!public
+!server
+!src

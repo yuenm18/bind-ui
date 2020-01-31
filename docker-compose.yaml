@@ -1,0 +1,14 @@
+version: '3'
+services:
+  bind-ui:
+    build:
+      context: .
+      args:
+        - ORIGIN
+        - ZONE_FILE
+    env_file:
+      - .env
+    image: bind-ui
+    ports:
+      - "53:53/udp"
+      - "3001:3001"
