@@ -4,3 +4,4 @@
 !public
 !server
 !src
+!docker-entrypoint.sh

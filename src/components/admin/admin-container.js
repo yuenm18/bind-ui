@@ -50,7 +50,6 @@ export default class AdminContainer extends React.Component {
             isLoading: false,
           });
 
-          this.props.displaySnackbarError();
           this.props.logout();
         });
   }
