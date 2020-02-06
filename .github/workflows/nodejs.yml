@@ -28,4 +28,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: bind-ui.tar.gz
-        path: .
+        path: bind-ui.tar.gz
