@@ -23,3 +23,13 @@ jobs:
     - run: npm test
       env:
         CI: true
+    - name: Build the Docker image
+      run: |
+        tag=bind-ui:$(date +%s)
+        docker build . --file Dockerfile --tag $tag
+        docker save $tag | gzip > bind-ui.tar.gz
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: bind-ui.tar.gz
+        path: .
