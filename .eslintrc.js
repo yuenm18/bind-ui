@@ -20,7 +20,6 @@ module.exports = {
   },
   'rules': {
     'object-curly-spacing': [2, 'always'],
-    'linebreak-style': 0,
   },
   'settings': {
     'react': {
